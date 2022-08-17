@@ -11,4 +11,13 @@ To compile, just run:
 make
 ```
 
-To run, do `make run`
+To run, do 
+```
+make run
+```
+
+# Goals / Roadmap
+
+## Ground Zero
+- [ ] Proper UART driver
+- [ ] Some form of interrupt handling
