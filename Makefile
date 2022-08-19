@@ -2,9 +2,9 @@ AS := arm-none-eabi-as
 CC := arm-none-eabi-gcc
 LD := arm-none-eabi-ld
 
-CFLAGS := -O2 -g -Wall -Wextra -pedantic
+CFLAGS := -O2 -g -Wall -Wextra -pedantic -Iinclude -ffreestanding
 
-OBJS := obj/kernel.o obj/stub.o
+OBJS := obj/kernel.o obj/stub.o obj/stdio.o
 all: clean zenith
 .PHONY: all
 
