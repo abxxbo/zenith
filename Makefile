@@ -5,7 +5,7 @@ LD := aarch64-linux-gnu-ld
 
 CFLAGS := -O2 -g -Wall -Wextra -pedantic -Iinclude -ffreestanding
 
-OBJS := obj/kernel.o obj/stub.o obj/stdio.o
+OBJS := obj/kernel.o obj/stub.o obj/stdio.o obj/mmio.o
 all: clean zenith
 .PHONY: all
 
