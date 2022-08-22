@@ -1,7 +1,6 @@
 #include "libc/stdio.h"
 
-volatile uint8_t* uart = (uint8_t* )0x09000000;
-
+volatile uint8_t* uart = (uint8_t*)UART_ADDR;
 
 void putc(char c) {
 	*uart = c;
@@ -12,4 +11,9 @@ void puts(const char *s) {
 		putc(*s);
 		s++;
 	}
+
+  // since puts in glibc does
+  // this, we should also do this
+  putc('\r');
+  putc('\n');
 }
