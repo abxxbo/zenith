@@ -1,5 +1,5 @@
 # zenith
-A small, experimental ARMv7 kernel targetting the Cortex A15 development board
+A small, experimental AArch kernel targetting the QEMU Virt Board
 
 ## Compilation
 Compilation requirements:
