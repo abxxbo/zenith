@@ -1,17 +1,18 @@
-# sigh...
 AS := aarch64-linux-gnu-as
 CC := aarch64-linux-gnu-gcc
 LD := aarch64-linux-gnu-ld
 
-CFLAGS := -O2 -g -Wall -Wextra -pedantic -Iinclude -ffreestanding
+CFLAGS := -O2 -g -Wall -Wextra -Iinclude -ffreestanding
 
-OBJS := obj/kernel.o obj/stub.o obj/stdio.o obj/mmio.o
+override OFILES := $(shell find ./obj/ -type f -name '*.o'|awk '!/stub/') obj/stub.o
+OBJS := $(OFILES)
+
+
 all: clean zenith
 .PHONY: all
 
 clean:
 	rm -rf bin *.elf *.o obj
-
 
 override CFILES := $(shell find ./ -type f -name '*.c')
 
@@ -23,5 +24,11 @@ zenith:
 	$(LD) -Tsrc/linker.ld $(OBJS) -o bin/kernel.elf
 
 
+QEMU 			 := qemu-system-aarch64
+QEMU_FLAGS := -machine virt \
+							-cpu cortex-a57 \
+							-monitor stdio \
+							-m 256m
+
 run: bin/kernel.elf
-	qemu-system-aarch64 -machine virt -cpu cortex-a57 -monitor stdio -kernel $^
+	$(QEMU) $(QEMU_FLAGS) -kernel $^
