@@ -76,7 +76,7 @@ char malloc(void* block){
 	int b_[8];
 	int k = 0;
 	int j = 0;
-	for(int i = 0; i < sizeof(block); i++){
+	for(int i = 0; i < (int)sizeof(block); i++){
 		b_[j] = ((uintptr_t)block >> k & 0xff);
 		j++;
 		k += 8;
