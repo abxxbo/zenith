@@ -16,5 +16,4 @@ void kmain(void) {
 
 	// interrupts
 	enable_IRQ();
-	enable_FIQ();
 }
