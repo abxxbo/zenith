@@ -29,6 +29,19 @@ QEMU_FLAGS := -machine virt \
 							-cpu cortex-a57 \
 							-monitor stdio \
 							-m 256m
+DEBUG_QEMU := $(QEMU_FLAGS) \
+							-S \
+							-s
+
 
 run: bin/kernel.elf
 	$(QEMU) $(QEMU_FLAGS) -kernel $^
+
+
+# You will have to install this yourself.
+# Arch has it in the AUR.
+GDB_TARGET := gdb-multiarch
+
+debug: bin/kernel.elf
+	$(QEMU) $(QEMU_FLAGS) -S -s -kernel $^ &
+	$(GDB_TARGET) -x debug/debug.gdb
