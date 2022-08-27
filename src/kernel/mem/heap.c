@@ -19,6 +19,15 @@ uint32_t malloc(int size){
 
 	uint32_t closest_free_spot = find_closest_free();
 
+	int counter = 0;
+	for(uint32_t _loc = closest_free_spot; _loc <= (closest_free_spot+size); _loc++){
+		int* _ptr = _loc;
+		int val = *_ptr;
+		if(val == 0) counter++;
+	}
+
+	if(counter-1 != size) return 0;
+
 	// This is the block we will use to add to the blocks
 	// array. It signifies that this block is NOT free
 	// and should not be re-allocated.
