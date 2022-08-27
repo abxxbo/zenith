@@ -30,9 +30,7 @@ QEMU_FLAGS := -machine virt \
 							-monitor stdio \
 							-m 256m
 DEBUG_QEMU := $(QEMU_FLAGS) \
-							-S \
-							-s
-
+							-d int
 
 run: bin/kernel.elf
 	$(QEMU) $(QEMU_FLAGS) -kernel $^
