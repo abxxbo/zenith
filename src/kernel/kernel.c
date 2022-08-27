@@ -22,4 +22,6 @@ void kmain(void) {
 	int* _ptr = foo;
 	int val = *_ptr;
 	printf("Checking 0x%x. Expected: 15. Result: %d\r\n", foo, val);
+
+	free(foo);
 }

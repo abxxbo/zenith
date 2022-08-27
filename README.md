@@ -3,7 +3,7 @@ A small, experimental AArch kernel targetting the QEMU Virt Board
 
 ## Compilation
 Compilation requirements:
-- arm-none-eabi-binutils
+- Any target of AArch64 binutils. (elf, gnu-eabi, none, etc.)
 - qemu
 
 To compile, just run:
@@ -19,5 +19,10 @@ make run
 # Goals / Roadmap
 
 ## Ground Zero
-- [ ] Proper UART driver
+- [X] Proper UART driver
+- [ ] A little MM
+	- [X] `free()`
+	- [X] `malloc()`
+	- [ ] `calloc()`
+	- [ ] `realloc()`
 - [ ] Some form of interrupt handling

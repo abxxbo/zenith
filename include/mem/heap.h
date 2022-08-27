@@ -41,3 +41,4 @@ uint32_t find_closest_free();
 // this allocates size, in bytes and returns
 // the starting address
 uint32_t malloc(int size);
+void free(void* ptr);
