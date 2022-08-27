@@ -30,26 +30,14 @@
 extern uint32_t end; // end of the kernel
 
 typedef struct {
-	uint32_t addr;		// the address of the block
-	void* cont;				// the contents
-	bool free;				// is the block free?
+	uint32_t start_addr; // starting address of memory
+	uint32_t end_addr;	 // ending address of memory
+	bool  	 freed;			 // is the memory freed?
 } block_t;
 
-#define BEGIN_SEARCH_LOC (&end)
-#define END_SEARCH_LOC   0x7FFFFFFF
-// find_open_spot will return the beginning of memory that can fit 
-// a 'block'.
-// It will search from "end" to 0x7FFFFFFF (also known as END_SEARCH_LOC)
-block_t find_open_spot(uint32_t sizeof_block);
+// find the closest spot of free memory
+uint32_t find_closest_free();
 
-
-#define SUCCESS_ 0x00
-#define FAILURE_ 0xff
-// Possibilities for malloc()'s return value:
-// 	0xFF -- failure in allocation
-//	0x00 -- success in allocation
-
-// this allocates a block of memory.
-char malloc(void* block);
-
-bool is_free(block_t block);
+// this allocates size, in bytes and returns
+// the starting address
+uint32_t malloc(int size);

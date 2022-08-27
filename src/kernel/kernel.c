@@ -15,10 +15,11 @@ void kmain(void) {
 	printf("\r\nMMIO base is at: %x\n\r\n", mmio_addr);
 
 
-	void* test = (void*)0xf7f7;
+	int foo = malloc(1); // allocate one byte
+	printf("Allocated 1 byte to 0x%x.\r\n", foo);
+	*(int*)foo = 0xf; // set to 15
 
-	printf("\r\nend kernel is at %x\r\n", &end);
-	printf("Testing allocator...\r\n\r\n");
-	char k_ = malloc(test) != 0x00;
-	if(k_ != 0x00) printf("Failed somewhere\n");
+	int* _ptr = foo;
+	int val = *_ptr;
+	printf("Checking 0x%x. Expected: 15. Result: %d\r\n", foo, val);
 }
