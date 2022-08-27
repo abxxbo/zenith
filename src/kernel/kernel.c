@@ -2,6 +2,7 @@
 #include "hal/mmio.h"
 
 #include "arch/int.h"
+#include "mem/heap.h"
  
 void kmain(void) {
   puts("Hello world!\r\n");
@@ -14,6 +15,8 @@ void kmain(void) {
 	printf("\r\nMMIO base is at: %x\n\r\n", mmio_addr);
 
 
-	// interrupts
-	enable_IRQ();
+	uint32_t* test = (uint32_t*)0xf7f7f7f7;
+	printf("\r\nend kernel is at %x\r\n", &end);
+	printf("Testing allocator...\r\n");
+	find_open_spot(sizeof(test));
 }
