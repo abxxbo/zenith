@@ -1,6 +1,9 @@
 #include "mem/heap.h"
 
-block_t find_open_spot(size_t sizeof_block){
+int count = 0; // number in array
+block_t blocks[256];
+
+block_t find_open_spot(uint32_t sizeof_block){
 	// if failed, this block will be returned.
 	block_t failed = { .addr = 0x00, .cont = NULL, .free = true };
 
@@ -58,7 +61,7 @@ bool is_free(block_t block){
 
 
 char malloc(void* block){
-	size_t block_size = sizeof(block);
+	uint32_t block_size = sizeof(block);
 	block_t b = find_open_spot(block_size);
 
 	// check initial conditions
@@ -67,6 +70,36 @@ char malloc(void* block){
 	// we can now set the memory's value to block's content.
 	*(int*)b.addr = block;
 
+	int x = 0;
+	
+	// assume 8 bytes
+	int b_[8];
+	int k = 0;
+	int j = 0;
+	for(int i = 0; i < sizeof(block); i++){
+		b_[j] = ((uintptr_t)block >> k & 0xff);
+		j++;
+		k += 8;
+	}
+
+	for(uint32_t i = b.addr; i <= b.addr+block_size; i++){
+		// set value
+		int* val = (int*)i;
+		*val = b_[x];
+
+		// read value and print it out
+		printf("Addr 0x%x is now set to 0x%x\r\n", i, *(uint32_t*)i);
+		x++;
+	}
+
+	// add block to blocks, then set it to be not free
+	b.free = false; // used!
+	blocks[count] = b;
+	count++;
+
+	// say that we've allocated
+	printf("\n%sAllocated 0x%x to address 0x%x!%s",
+					"\033[1;94m", block, b.addr, COLOR_None);
 
 	// if we get here, then everything went well.
 	return SUCCESS_;

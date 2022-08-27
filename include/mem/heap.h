@@ -40,7 +40,7 @@ typedef struct {
 // find_open_spot will return the beginning of memory that can fit 
 // a 'block'.
 // It will search from "end" to 0x7FFFFFFF (also known as END_SEARCH_LOC)
-block_t find_open_spot(size_t sizeof_block);
+block_t find_open_spot(uint32_t sizeof_block);
 
 
 #define SUCCESS_ 0x00

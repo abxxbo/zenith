@@ -1,12 +1,17 @@
 #include "libc/string.h"
 
+char* itoa(unsigned int num, int base){ 
+	static char repr[]= "0123456789abcdef";
+	static char buffer[50]; 
+	char *ptr; 
 
-// credit: robert scgaoer
-char* itoa(int val, int base){
-	static char buf[32] = {0};
-	
-	int i = 30;
-	for(; val && i ; --i, val /= base) buf[i] = "0123456789abcdef"[val % base];
-	
-	return &buf[i+1];	
+	ptr = &buffer[49]; 
+	*ptr = '\0'; 
+
+	do {
+		*--ptr = repr[num%base]; 
+		num /= base; 
+	}while(num != 0); 
+
+	return(ptr); 
 }
