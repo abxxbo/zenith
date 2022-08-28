@@ -3,13 +3,9 @@
 ---
 
 <h1 align="center">Zenith</h1>
+A small, experimental AArch kernel targetting the QEMU Virt Board
 
-<h2 align="center">A small, experimental AArch kernel targetting the QEMU Virt Board</h2>
-
-<br>
-<br>
-
-<h1 align="center">Compilation</h1>
+<h2 align="center">Compilation</h2>
 
 Compilation requirements:
 - Any target of AArch64 binutils. (elf, gnu-eabi, none, etc.)
