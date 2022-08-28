@@ -24,4 +24,8 @@ void kmain(void) {
 	printf("Checking 0x%x. Expected: 15. Result: %d\r\n", foo, val);
 
 	free(foo);
+
+	// finished initializing, let user do stuff
+	printf("%sZenith is done initializing itself...%s\r\n",
+					COLOR_Yellow, COLOR_None);
 }
