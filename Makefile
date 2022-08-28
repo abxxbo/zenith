@@ -1,6 +1,10 @@
-AS := aarch64-elf-as
-CC := aarch64-elf-gcc
-LD := aarch64-elf-ld
+# Changeable -- see docs/make_arguments.md
+TARGET 		:= elf
+COMPILER	:= gcc
+
+AS := aarch64-$(TARGET)-as
+CC := aarch64-$(TARGET)-$(COMPILER)
+LD := aarch64-$(TARGET)-ld
 
 CFLAGS := -O2 -g -Wall -Wextra -Iinclude -ffreestanding
 
