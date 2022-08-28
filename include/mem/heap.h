@@ -13,11 +13,11 @@
 
 
 // The memory-mapped peripherals are where stuff like the UART controller
-// is. Zenith's MMU will not search here.
+// is. Zenith's MM will not search here.
 #define M_PER_START 0x00000000
 #define M_PER_END   0x3FFFFFFF
 
-// The MMU will not search this area for free memory, since this
+// The MM will not search this area for free memory, since this
 // is reserved for the bootloader.
 #define RESERVED_BOOT_START 0x40000000
 #define RESERVED_BOOT_END   0x4007FFFF
