@@ -33,12 +33,3 @@
 #define GICC_PMR_PRIO_LOW  0xFF
 #define GICC_BPR_NO_GRUOUP 0x00
 #define ICFGR_EDGE				 2
-
-
-void init_gic(void);
-void enable_gic(uint32_t interrupt);
-void clear_int(uint32_t interrupt);
-
-void set_core(uint32_t interrupt, uint32_t core);
-void set_prio(uint32_t interrupt, uint32_t priority);
-void set_config(uint32_t interrupt, uint32_t config);

@@ -19,11 +19,13 @@ clean:
 	rm -rf bin *.elf *.o obj
 
 override CFILES := $(shell find ./ -type f -name '*.c')
+override ASMFILES := $(shell find ./ -type f -name '*.asm')
 
 zenith:
 	mkdir -p obj/ bin/
 	$(AS) src/stub.s -o obj/stub.o 
 	$(foreach file, $(CFILES), $(CC) $(CFLAGS) -c $(file) -o obj/$(basename $(notdir $(file))).o;)
+	$(foreach file, $(ASMFILES), $(AS) $(file) -o obj/$(basename $(notdir $(file))).o;)
 
 	$(LD) -Tsrc/linker.ld $(OBJS) -o bin/kernel.elf
 
