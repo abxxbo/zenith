@@ -12,7 +12,7 @@ void kmain(void) {
 		puts("\r\nNon RPi Board Detected.");
 	}
 
-	printf("\r\nMMIO base is at: %x\n\r\n", mmio_addr);
+	printf("\r\nMMIO base is at: 0x%x\n\r\n", mmio_addr);
 
 
 	int foo = malloc(1); // allocate one byte
