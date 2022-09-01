@@ -14,7 +14,7 @@ uint32_t find_closest_free(){
 	return 0x00;
 }
 
-uint32_t malloc(int size){
+uint32_t __mem_malloc(int size){
 	if(size <= 0) return 0;
 
 	uint32_t closest_free_spot = find_closest_free();
@@ -41,7 +41,7 @@ uint32_t malloc(int size){
 	return closest_free_spot;
 }
 
-void free(void* ptr){
+void __mem_free(void* ptr){
 	// find the end address
 	uint32_t block_no = 0;
 	for(int i = 0; i < 256; i++){
@@ -54,4 +54,12 @@ void free(void* ptr){
 	blocks[block_no].freed = true; // we can allocate this!
 	printf("\r\nBlock #%d was freed. Values:\r\n\tStarting addr: \t0x%x\r\n\tEnding addr: \t0x%x\r\n",
 					block_no, blocks[block_no].start_addr, blocks[block_no].end_addr);
+}
+
+void* __mem_calloc(int size){
+	void* alloc_mm = __mem_malloc(size); // allocate the block
+
+	// set the memory value to 0
+	memcpy(alloc_mm, 0, size);
+	return alloc_mm;
 }

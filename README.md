@@ -32,6 +32,6 @@ Running is simple, just `make run`. However, to debug, you need
 - [ ] A little MM
 	- [X] `free()`
 	- [X] `malloc()`
-	- [ ] `calloc()`
+	- [X] `calloc()`
 	- [ ] `realloc()`
 - [ ] Some form of interrupt handling

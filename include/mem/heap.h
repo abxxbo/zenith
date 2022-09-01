@@ -10,6 +10,7 @@
 #include <stdbool.h>
 
 #include <libc/stdio.h>
+#include <libc/stdlib.h>
 
 
 // The memory-mapped peripherals are where stuff like the UART controller
@@ -40,5 +41,15 @@ uint32_t find_closest_free();
 
 // this allocates size, in bytes and returns
 // the starting address
-uint32_t malloc(int size);
-void free(void* ptr);
+uint32_t __mem_malloc(int size); // allocate "size"
+void 		 __mem_free(void* ptr);  // free said allocated area
+void* 	 __mem_calloc(int size); // call malloc and set that memory to zero
+
+/* A note to whoever is reading this:
+ * I append "__mem" to all the functions here, so that,
+ * in stdlib.h, I can easily just do something like
+ * uint32_t malloc(int size){ __mem_malloc(size); }.
+ * 
+ * This is because I want to stay true to how GLIBC does it
+ * (malloc/calloc/free are in stdlib.h)
+*/
