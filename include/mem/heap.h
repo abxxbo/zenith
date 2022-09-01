@@ -44,6 +44,7 @@ uint32_t find_closest_free();
 uint32_t __mem_malloc(int size); // allocate "size"
 void 		 __mem_free(void* ptr);  // free said allocated area
 void* 	 __mem_calloc(int size); // call malloc and set that memory to zero
+void* 	 __mem_realloc(void* ptr, int size);
 
 /* A note to whoever is reading this:
  * I append "__mem" to all the functions here, so that,

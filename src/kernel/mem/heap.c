@@ -63,3 +63,23 @@ void* __mem_calloc(int size){
 	memcpy(alloc_mm, 0, size);
 	return alloc_mm;
 }
+
+void* __mem_realloc(void* ptr, int size){
+	// act like free()
+	if(size == 0){
+		__mem_free(ptr);
+		return NULL;
+	}
+	// act like malloc()
+	if(ptr == 0) return __mem_malloc(size);
+
+
+	// if none of these cases, reallocate
+	// credit: Bonfra from the OSDev Discord
+	void* new_ptr = malloc(size);
+	if(new_ptr != NULL){
+		memcpy(new_ptr, ptr, size);
+		free(ptr);
+	}
+  return new_ptr;
+}

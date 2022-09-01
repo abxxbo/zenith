@@ -13,3 +13,4 @@ void memcpy(void* destination, void* source, uint32_t num);
 uint32_t malloc(int size);
 void 	   free(void* ptr);
 void*    calloc(int size);
+void*    realloc(void* ptr, int size);

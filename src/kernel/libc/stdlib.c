@@ -45,3 +45,7 @@ void free(void* ptr){
 void* calloc(int size){
   return __mem_calloc(size);
 }
+
+void* realloc(void* ptr, int size){
+  return __mem_realloc(ptr, size);
+}
