@@ -14,6 +14,7 @@ endef
 # We are only using "cc" as a placeholder here. It may work by using
 # the host system's toolchain, but this is not guaranteed.
 $(eval $(call DEFAULT_VAR,CC,aarch64-linux-gnu-gcc))
+CC := aarch64-linux-gnu-gcc
  
 # Same thing for "ld" (the linker).
 $(eval $(call DEFAULT_VAR,LD,aarch64-linux-gnu-ld))
@@ -69,7 +70,7 @@ override HEADER_DEPS := $(CFILES:.c=.d) $(ASFILES:.S=.d)
  
 # Default target.
 .PHONY: all
-all: $(KERNEL)
+all: $(KERNEL) makeiso
  
 # Link rules for the final kernel executable.
 $(KERNEL): $(OBJ)
@@ -93,4 +94,7 @@ $(KERNEL): $(OBJ)
 # Remove object files and the final executable.
 .PHONY: clean
 clean:
-	rm -rf $(KERNEL) $(OBJ) $(HEADER_DEPS)
+	rm -rf $(KERNEL) $(OBJ) $(HEADER_DEPS) image.iso
+
+makeiso:
+	bash ./get-iso.sh
