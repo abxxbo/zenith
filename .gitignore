@@ -2,6 +2,7 @@ obj/
 bin/
 
 *.o
+*.d
 *.elf
 
 .vscode/
