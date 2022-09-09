@@ -106,7 +106,7 @@ ARGS		:= -cpu cortex-a72 \
 run: clean-objs ovmf-firmware qemu
 
 clean-objs:
-	rm -rf $(KERNEL) $(OBJ) $(HEADER_DEPS) limine/ iso_root/ bin/ obj/
+	rm -rf $(KERNEL) $(OBJ) $(HEADER_DEPS) limine/ bin/ obj/
 
 ovmf-firmware:
 	mkdir -p firmware
