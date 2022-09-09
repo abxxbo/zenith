@@ -8,7 +8,11 @@
  
 // The following will be our kernel's entry point.
 void _start(void) {
-    puts("Hello, AArch64 World!");
-    // We're done, just hang...
-    done();
+  printf("Printf test!\nStr: %s\"%s\"%s\nInt: %s%d%s\nHex: %s0x%x%s\n",
+          COLOR_Blue, "Hi!", COLOR_None,
+          COLOR_Blue, 0xf, COLOR_None,
+          COLOR_Blue, 0xc0f33, COLOR_None);
+
+  // We're done, just hang...
+  done();
 }
