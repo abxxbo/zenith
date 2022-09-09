@@ -6,13 +6,20 @@
  
 #define done() for(;;) __asm__("1: b .");
  
-// The following will be our kernel's entry point.
-void _start(void) {
-  printf("Printf test!\nStr: %s\"%s\"%s\nInt: %s%d%s\nHex: %s0x%x%s\n",
-          COLOR_Blue, "Hi!", COLOR_None,
-          COLOR_Blue, 0xf, COLOR_None,
-          COLOR_Blue, 0xc0f33, COLOR_None);
+struct limine_memmap_request mm_req = {
+  .id = LIMINE_MEMMAP_REQUEST,
+  .revision = 1
+};
 
+
+void _start(void) {
+  printf("There are %d entries in the memory map.\n", mm_req.response->entry_count);
+
+  for(uint64_t i = 1; i <= mm_req.response->entry_count; i++){
+    printf("Entry #%d: Base Addr: %s0x%x%s | Length: %s0x%x%s | Type: %d\n",
+            i, mm_req.response->entries[i]->base, 
+            mm_req.response->entries[i]->length, mm_req.response->entries[i]->type);
+  }
   // We're done, just hang...
   done();
 }
