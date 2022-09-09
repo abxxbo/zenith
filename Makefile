@@ -94,7 +94,28 @@ $(KERNEL): $(OBJ)
 # Remove object files and the final executable.
 .PHONY: clean
 clean:
-	rm -rf $(KERNEL) $(OBJ) $(HEADER_DEPS) image.iso
+	rm -rf $(KERNEL) $(OBJ) $(HEADER_DEPS) image.iso firmware/
 
 makeiso:
 	bash ./get-iso.sh
+
+
+MACHINE := virt
+ARGS		:= -cpu cortex-a72 \
+					 -m 512m \
+					 -bios firmware/OVMF.fd \
+					 -monitor stdio \
+					 -smp 4 -device ramfb -device qemu-xhci -device usb-kbd
+
+run: clean-objs ovmf-firmware qemu
+
+clean-objs:
+	rm -rf $(KERNEL) $(OBJ) $(HEADER_DEPS) limine/ iso_root/ bin/ obj/
+
+ovmf-firmware:
+	mkdir -p firmware
+	cd firmware && curl -o OVMF-AA64.zip https://efi.akeo.ie/OVMF/OVMF-AA64.zip && unzip OVMF-AA64.zip
+	rm firmware/readme.txt &&	rm firmware/OVMF-AA64.zip
+
+qemu:
+	qemu-system-aarch64 -M $(MACHINE) $(ARGS) -cdrom image.iso

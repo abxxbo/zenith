@@ -1,8 +1,12 @@
+# Build artifacts
 obj/
 bin/
-
 *.o
 *.d
 *.elf
+*.iso
+iso_root/
+limine/
+firmware/
 
 .vscode/
