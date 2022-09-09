@@ -38,6 +38,7 @@ override CFLAGS +=       \
     -fno-pic             \
     -mgeneral-regs-only  \
     -MMD                 \
+    -Iinclude/libc       \
     -Iinclude
  
 # Internal linker flags that should not be changed by the user.
