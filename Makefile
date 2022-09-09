@@ -66,7 +66,7 @@ override HEADER_DEPS := $(CFILES:.c=.d) $(ASFILES:.S=.d)
  
 # Default target.
 .PHONY: all
-all: $(KERNEL) makeiso
+all: clean $(KERNEL) makeiso
  
 # Link rules for the final kernel executable.
 $(KERNEL): $(OBJ)
@@ -97,11 +97,11 @@ makeiso:
 
 
 MACHINE := virt
-ARGS		:= -cpu cortex-a72 \
-					 -m 512m \
-					 -bios firmware/OVMF.fd \
-					 -monitor stdio \
-					 -smp 4 -device ramfb -device qemu-xhci -device usb-kbd
+ARGS	:= -cpu cortex-a72 \
+            -m 512m \
+            -bios firmware/OVMF.fd \
+            -monitor stdio \
+            -device ramfb -device qemu-xhci -device usb-kbd
 
 run: clean-objs ovmf-firmware qemu
 
