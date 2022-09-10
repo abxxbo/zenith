@@ -3,6 +3,7 @@
 #include <limine.h>
 
 #include "libc/stdio.h"
+#include "mem/pmm.h"
  
 #define done() for(;;) __asm__("1: b .");
  
@@ -11,15 +12,25 @@ struct limine_memmap_request mm_req = {
   .revision = 1
 };
 
-
 void _start(void) {
+  printf("%sHello, AArch64 World!%s\n",
+          COLOR_Red, COLOR_None);
   printf("There are %d entries in the memory map.\n", mm_req.response->entry_count);
 
+  // append each memory map value to the blocks array
   for(uint64_t i = 0; i < mm_req.response->entry_count; i++){
-    printf("Entry #%d: Base Addr: 0x%x | Length: 0x%x | Type: %d\n",
-            i, mm_req.response->entries[i]->base, 
-            mm_req.response->entries[i]->length, mm_req.response->entries[i]->type);
+    if(mm_req.response->entries[i]->type == 1){
+      add_to_blocks(mm_req.response->entries[i]->base,
+                    mm_req.response->entries[i]->length+mm_req.response->entries[i]->base,
+                    FREE_BLOCK, i);
+    } else {
+      add_to_blocks(mm_req.response->entries[i]->base,
+                    mm_req.response->entries[i]->length+mm_req.response->entries[i]->base,
+                    OCCUPIED_BLK, i);
+    }
   }
+  printf("finished.\n");
+  
   // We're done, just hang...
   done();
 }
