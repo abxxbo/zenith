@@ -98,11 +98,14 @@ makeiso:
 
 
 MACHINE := virt
-ARGS	:= -cpu cortex-a72 \
-            -m 512m \
-            -bios firmware/OVMF.fd \
-            -monitor stdio \
-            -device ramfb -device qemu-xhci -device usb-kbd
+ARGS	:= -cpu cortex-a72          \
+            -m 512m                 \
+            -bios firmware/OVMF.fd  \
+            -monitor stdio          \
+            -device ramfb           \
+            -device qemu-xhci       \
+            -device usb-kbd         \
+            -d int                  \
 
 run: clean-objs ovmf-firmware qemu
 
