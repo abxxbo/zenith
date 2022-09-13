@@ -16,7 +16,7 @@ typedef struct block {
 } block_t;
 
 #define MAX_BLOCKS 256
-
+#define NO_LOC     0xfafafa
 
 // Add one value to the blocks at index
 void add_to_blocks(uint64_t starting_addr, 
@@ -25,7 +25,7 @@ void add_to_blocks(uint64_t starting_addr,
 
 // Find the closest place in the memory map
 // that can fit N bytes.
-uint64_t find_hole_in_mm(uint32_t n);
+uint64_t find_hole_in_mm(uint64_t n);
 
 // Memory allocation functions
 // Wrappers in libc/stdlib.h
