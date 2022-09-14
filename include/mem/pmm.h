@@ -29,5 +29,5 @@ uint64_t find_hole_in_mm(uint64_t n);
 
 // Memory allocation functions
 // Wrappers in libc/stdlib.h
-uint64_t __mem_malloc(uint64_t size);
+uint64_t __mem_malloc(uint64_t size, uint32_t magic);
 void     __mem_free(uint64_t location);

@@ -3,6 +3,8 @@
 #include <limine.h>
 
 #include "libc/stdio.h"
+#include "libc/stdlib.h"
+
 #include "mem/pmm.h"
  
 #define done() for(;;) __asm__("1: b .");
@@ -30,7 +32,9 @@ void _start(void) {
     }
   }
   printf("finished.\n");
-  
+
+  uint64_t t = malloc(2);
+  printf("Allocated to 0x%x, 2 bytes.\n", t);
   // We're done, just hang...
   done();
 }

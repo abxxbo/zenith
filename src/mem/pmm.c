@@ -42,7 +42,8 @@ uint64_t find_hole_in_mm(uint64_t n){
   }
 }
 
-uint64_t __mem_malloc(uint64_t size){
+uint64_t __mem_malloc(uint64_t size, uint32_t magic){
+  if(magic != 1234) printf("WARN: Do not use __mem_malloc(). Instead, use malloc()\n");
   // Step 1: get memory hole
   uint64_t m_loc = find_hole_in_mm(size);
   if(m_loc == NO_LOC) return NO_LOC;
@@ -69,6 +70,12 @@ uint64_t __mem_malloc(uint64_t size){
 
 
 void __mem_free(uint64_t location){
+  #ifndef SEC_F // If SEC_F is not defined
+                // show a warning message
+                // that you should use free()
+                // instead
+    printf("WARN: Do not use __mem_free(). Instead, use free()\n");
+  #endif
   uint64_t z = 0; // block # to free 
   for(size_t i = 0; i != block_arr_size; i++){
     if(blocks[i].start_addr == location) z = i; break;
