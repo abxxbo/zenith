@@ -3,7 +3,7 @@
 ---
 
 <h1 align="center">Zenith</h1>
-A small, experimental AArch kernel targetting the QEMU Virt Board
+A small, experimental AArch kernel.
 
 <h2 align="center">Compilation</h2>
 
@@ -18,9 +18,12 @@ For example, to compile Zenith for `aarch-none-eabi`, you can do
 `make TARGET=none-eabi`.
 
 ### Running
-Running requires 1 dependency (2 if you are debugging). They are:
+Running requires a few dependecies. They are:
 - Aarch64 QEMU
-- `gdb-multiarch` (install from AUR, etc...)
+- Curl
+- XORRISO
+- Unzip
+- git
 
 Running is simple, just `make run`. However, to debug, you need
 `make debug`.

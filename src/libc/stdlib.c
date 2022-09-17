@@ -32,20 +32,7 @@ void memcpy(void* destination, void* source, uint32_t num) {
 	}
 }
 
-/***************************************************************/
-
-uint32_t malloc(int size){
-  return __mem_malloc(size);
-}
-
-void free(void* ptr){
-  return __mem_free(ptr);
-}
-
-void* calloc(int size){
-  return __mem_calloc(size);
-}
-
-void* realloc(void* ptr, int size){
-  return __mem_realloc(ptr, size);
-}
+uint64_t malloc(uint64_t size){ return __mem_malloc(size);     }
+void     free(uint64_t location){ return __mem_free(location); }
+uint64_t realloc(void* ptr, uint64_t size){ return __mem_realloc(ptr, size); }
+uint64_t calloc(int size){ return __mem_calloc(size); }

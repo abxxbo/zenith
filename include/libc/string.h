@@ -1,6 +1,6 @@
 #pragma once
 
-#include <stdint.h>
-#include <stddef.h>
+#include <stdint-gcc.h>
 
-char* itoa(unsigned int num, int base);
+int strlen(char* f);
+char* itoa(uint32_t number, int base);

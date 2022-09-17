@@ -1,16 +1,14 @@
 #pragma once
 
-#include <stdint.h>
 #include <stddef.h>
+#include <stdint.h>
+#include "mem/pmm.h"
 
-#include <mem/heap.h>
 
 void memcpy(void* destination, void* source, uint32_t num);
 
+// Allocate N bytes
+uint64_t malloc(uint64_t size);
 
-/* These do not have comments to document
- * what they do. You can just read mem/heap.h */
-uint32_t malloc(int size);
-void 	   free(void* ptr);
-void*    calloc(int size);
-void*    realloc(void* ptr, int size);
+// Free a block location
+void     free(uint64_t location);
