@@ -5,6 +5,8 @@
 #include "mem/pmm.h"
 
 
+void memcpy(void* destination, void* source, uint32_t num);
+
 // Allocate N bytes
 uint64_t malloc(uint64_t size);
 

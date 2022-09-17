@@ -42,8 +42,7 @@ uint64_t find_hole_in_mm(uint64_t n){
   }
 }
 
-uint64_t __mem_malloc(uint64_t size, uint32_t magic){
-  if(magic != 1234) printf("WARN: Do not use __mem_malloc(). Instead, use malloc()\n");
+uint64_t __mem_malloc(uint64_t size){
   // Step 1: get memory hole
   uint64_t m_loc = find_hole_in_mm(size);
   if(m_loc == NO_LOC) return NO_LOC;
@@ -83,4 +82,31 @@ void __mem_free(uint64_t location){
 
   // Block located!! set to free, we can allocate to this!
   blocks[z].freed = FREE_BLOCK;
+}
+
+uint64_t __mem_realloc(void* ptr, uint64_t size){
+  if(size == 0){
+		__mem_free(ptr);
+		return NULL;
+	}
+	// act like malloc()
+	if(ptr == 0) return __mem_malloc(size);
+
+
+	// if none of these cases, reallocate
+	// credit: Bonfra from the OSDev Discord
+	void* new_ptr = malloc(size);
+	if(new_ptr != NULL){
+		memcpy(new_ptr, ptr, size);
+		free(ptr);
+	}
+  return new_ptr;
+}
+
+uint64_t __mem_calloc(int size){
+	void* alloc_mm = __mem_malloc(size); // allocate the block
+
+	// set the memory value to 0
+	memcpy(alloc_mm, 0, size);
+	return alloc_mm;
 }

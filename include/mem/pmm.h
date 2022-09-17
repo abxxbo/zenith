@@ -3,6 +3,8 @@
 #include <stddef.h>
 #include <stdint.h>
 
+#include "libc/stdlib.h"
+
 enum BLOCK_FREE {
   FREE_BLOCK   = 1,
   OCCUPIED_BLK = 0
@@ -27,7 +29,11 @@ void add_to_blocks(uint64_t starting_addr,
 // that can fit N bytes.
 uint64_t find_hole_in_mm(uint64_t n);
 
+
+
 // Memory allocation functions
 // Wrappers in libc/stdlib.h
-uint64_t __mem_malloc(uint64_t size, uint32_t magic);
+uint64_t __mem_malloc(uint64_t size);
 void     __mem_free(uint64_t location);
+uint64_t __mem_realloc(void* ptr, uint64_t size);
+uint64_t __mem_calloc(int size);
