@@ -6,7 +6,9 @@
 #include "libc/stdlib.h"
 
 #include "mem/pmm.h"
- 
+
+#include "fb/framebuffer.h"
+
 #define done() for(;;) __asm__("1: b .");
  
 struct limine_memmap_request mm_req = {
@@ -35,6 +37,11 @@ void _start(void) {
 
   uint64_t t = malloc(2);
   printf("Allocated to 0x%x, 2 bytes.\n", t);
+
+  void* fb_place = get_fb_addr();
+  printf("Our framebuffer is at 0x%x\n", fb_place);
+  printf("You should be seeing a blue pixel, top left.\n");
+  plot_pixel(fb_place, 0, 0, BLUE);
   // We're done, just hang...
   done();
 }
